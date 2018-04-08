@@ -15,5 +15,8 @@
     "gecko": {
       "strict_min_version": "55.0a2"
     }
+  },
+  "icons": {
+    "434": "icon.png"
   }
 }
