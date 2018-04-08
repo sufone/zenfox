@@ -19,24 +19,30 @@ var green =   "#859900";
 var currentTheme = '';
 
 const themes = {
-  'day': {
-    colors: {
-      "accentcolor": "tomato",
-      "textcolor": "white",
-      "toolbar": "#444",
-      "toolbar_text": "lightgray",
-      "toolbar_field": "black",
-      "toolbar_field_text": "white"
-    }
-  },
   'night': {
     colors: {
-      "accentcolor": "tomato",
-      "textcolor": "white",
-      "toolbar": "#444",
-      "toolbar_text": "lightgray",
-      "toolbar_field": "black",
-      "toolbar_field_text": "white"
+      "accentcolor": base3,
+      "textcolor": base01,
+      "toolbar": base2,
+      "toolbar_text": base00,
+      "toolbar_field": base3,
+      "toolbar_field_text": base01
+    },
+    "images": {
+      "headerURL": ""
+    }
+  },
+  'day': {
+    colors: {
+      "accentcolor": base02,
+      "textcolor": base1,
+      "toolbar": base03,
+      "toolbar_text": base0,
+      "toolbar_field": base02,
+      "toolbar_field_text": base1
+    }, 
+    "images": {
+      "headerURL": ""
     }
   }
 };
