@@ -1,0 +1,19 @@
+{
+  "description": "Theme Firefox to suit you, day or night. Solarized.",
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/dynamic-theme",
+  "manifest_version": 2,
+  "name": "Solarized Fox",
+  "permissions": [
+    "alarms",
+    "theme"
+  ],
+  "background": {
+    "scripts": ["theme.js"]
+  },
+  "version": "0.1",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "55.0a2"
+    }
+  }
+}
