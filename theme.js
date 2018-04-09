@@ -1,5 +1,5 @@
 //solarized theme
-var base03 = "#002b36";
+var base03 =  "#002b36";
 var base02 =  "#073642";
 var base01 =  "#586e75";
 var base00 =  "#657b83";
@@ -19,7 +19,7 @@ var green =   "#859900";
 var currentTheme = '';
 
 const themes = {
-  'night': {
+  'day': {
     colors: {
       "accentcolor": base3,
       "textcolor": base01,
@@ -32,7 +32,7 @@ const themes = {
       "headerURL": ""
     }
   },
-  'day': {
+  'night': {
     colors: {
       "accentcolor": base02,
       "textcolor": base1,
@@ -69,7 +69,19 @@ function checkTime() {
 
 // On start up, check the time to see what theme to show.
 checkTime();
-
 // Set up an alarm to check this regularly.
 browser.alarms.onAlarm.addListener(checkTime);
 browser.alarms.create('checkTime', {periodInMinutes: 5});
+
+function theme(type) {
+  if (type === "byTime") {
+    checkTime();
+  } else if (type === "byChoiceDay") {
+    setTheme('day');
+  } else if (type === "byChoiceNight") {
+    setTheme('night');
+  } else if (type === "bySiteColor") {
+
+  }
+}
+
