@@ -72,16 +72,3 @@ checkTime();
 // Set up an alarm to check this regularly.
 browser.alarms.onAlarm.addListener(checkTime);
 browser.alarms.create('checkTime', {periodInMinutes: 5});
-
-function theme(type) {
-  if (type === "byTime") {
-    checkTime();
-  } else if (type === "byChoiceDay") {
-    setTheme('day');
-  } else if (type === "byChoiceNight") {
-    setTheme('night');
-  } else if (type === "bySiteColor") {
-
-  }
-}
-
