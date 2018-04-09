@@ -5,7 +5,8 @@
   "name": "Solarized Fox",
   "permissions": [
     "alarms",
-    "theme"
+    "theme",
+    "storage"
   ],
   "background": {
     "scripts": ["theme.js"]
@@ -27,5 +28,8 @@
     },
     "default_title": "Zen Fox",
     "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html"
   }
 }

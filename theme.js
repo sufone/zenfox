@@ -17,7 +17,6 @@ var cyan =    "#2aa198";
 var green =   "#859900";
 
 var currentTheme = '';
-
 const themes = {
   'day': {
     colors: {
@@ -56,11 +55,18 @@ function setTheme(theme) {
   browser.theme.update(themes[theme]);
 }
 
+//time method--------------------------------------------------------
 function checkTime() {
   let date = new Date();
   let hours = date.getHours();
   // Will set the sun theme between 6am and 6pm.
-  if ((hours > 6) && (hours < 18)) {
+  var hourStart = localStorage.getItem("hourStart");
+  var hourEnd = localStorage.getItem("hourEnd");
+  if (((hourStart > 24) || (hourStart < 0)) || (hourStart > hourEnd) || ((hourEnd > 24) || (hourEnd < 0))) {
+    var hourStart = 6;
+    var hourEnd = 18;
+  }
+  if ((hours > hourStart) && (hours < hourEnd)) {
     setTheme('day');
   } else {
     setTheme('night');
@@ -72,3 +78,5 @@ checkTime();
 // Set up an alarm to check this regularly.
 browser.alarms.onAlarm.addListener(checkTime);
 browser.alarms.create('checkTime', {periodInMinutes: 5});
+
+//click button method-----------------------------------------------
