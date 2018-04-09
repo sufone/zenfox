@@ -17,6 +17,15 @@
     }
   },
   "icons": {
-    "434": "icon.png"
+    "48": "icon48.png",
+    "96": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icon48.png",
+      "96": "icon.png"
+    },
+    "default_title": "Zen Fox",
+    "default_popup": "popup.html"
   }
 }
