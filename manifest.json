@@ -1,6 +1,6 @@
 {
   "description": "Theme Firefox to suit you, day or night. Solarized.",
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/dynamic-theme",
+  "homepage_url": "https://github.com/mr-islam/zen-fox",
   "manifest_version": 2,
   "name": "Zen Fox",
   "permissions": [
@@ -23,10 +23,10 @@
   "options_ui": {
     "page": "settings/settings.html"
   },
-  "version": "0.4",
+  "version": "1.0",
   "applications": {
     "gecko": {
-      "strict_min_version": "59"
+      "strict_min_version": "60.0b11"
     }
   }
 }
