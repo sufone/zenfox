@@ -36,17 +36,14 @@ const themes = {
       "toolbar_vertical_separator": base3,
       "toolbar_field_separator": base2
     },
-    "images": {
-      "headerURL": ""
-    }
   },
   'dark': {
     colors: {
-      "accentcolor": base02,
+      "accentcolor": base03,
       "textcolor": base1,
-      "toolbar": base03,
+      "toolbar": base02,
       "toolbar_text": base0,
-      "toolbar_field": base02,
+      "toolbar_field": base03,
       "toolbar_field_text": base1,
       "tab_line": cyan,
       "popup": base03,
@@ -57,9 +54,6 @@ const themes = {
       "toolbar_vertical_separator": base02,
       "toolbar_field_separator": base03
     }, 
-    "images": {
-      "headerURL": ""
-    }
   }
 };
 
@@ -83,25 +77,19 @@ function applyDark() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+const date = new Date();
+const hours = date.getHours();
+
 function timeMethod() {
-  let date = new Date();
-  let hours = date.getHours();
-  // Will set the sun theme between 6am and 6pm.
   if ((hours > 6) && (hours < 18)) {
       applyLight();
     } else {
       applyDark();
     }
     console.log('timeMethod used');
+    browser.alarms.onAlarm.addListener(timeMethod);
+    browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
-
-/*
-// On start up, check the time to see what theme to show.
-timeMethod();
-// Set up an alarm to check this regularly.
-browser.alarms.onAlarm.addListener(timeMethod);
-browser.alarms.create('timeMethod', {periodInMinutes: 5});
-*/
 
 var i = 1;
 function manualMethod() {
@@ -116,11 +104,49 @@ function manualMethod() {
   }
 }
 
+function weatherMethod() {
+  fetch('http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=8c0be18164812b760e6774e9bfee19e9')
+  .then(response => response.json())
+  .then(data => {
+    var cloudPercent = data.clouds.all;
+    console.log('cloud %: ' + cloudPercent);
+
+    if (cloudPercent < 50) {
+      applyDark();
+    } else {
+      applyLight();
+    }
+    console.log('weather method complete');
+  });
+
+  
+}
+
 //////////////////////////////////////////////////////////////////
 
 async function methodHandler() {
   console.log("method handler called");
   let method = await browser.storage.local.get("method");
+
+  function accentHandler() {
+    console.log('accent handler called');
+    var accentColorLight = browser.storage.local.get('accentColorForLight');
+    var accentColorDark = browser.storage.local.get('accentColorForLight');
+
+    for (let i = 0; i < themes['light'].colors.length; i++) {
+      if (themes['light'].colors[i] === magenta) {
+        themes['light'].colors[i] = accentColorLight;
+      }
+    }
+    for (let i = 0; i < themes['dark'].colors.length; i++) {
+      if (themes['dark'].colors[i] === cyan) {
+        themes['dark'].colors[i] = accentColorDark;
+      }
+    }  
+  }
+  accentHandler();
+
+  
   let methodProp = method["method"];
   console.log(methodProp);
 
@@ -130,9 +156,10 @@ async function methodHandler() {
   } else if (methodProp == "time") {
     console.log("time method selected");
     timeMethod()
-  } else if (method == "weather") {
-
-  } else if (method == "site") {
+  } else if (methodProp == "weather") {
+    console.log("weather method selected");
+    weatherMethod();
+  } else if (methodProp == "site") {
 
   }
 

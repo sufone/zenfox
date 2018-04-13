@@ -6,21 +6,45 @@
 
   <body>
     <h1>Settings</h1>
-    <p>For your zen, choose a method:</p>
     <form>
+        <p>For your zen, choose a method:</p>
         <select id="method">
           <option value="manual">Manually toggle using toolbar button</option>
           <option selected value="time">Automatically switch between themes at 6am/pm</option>
-          <option disabled value="site">Derive theme from site colors</option>
-          <option disabled value="weather">Change theme based on current weather</option>
+          <option value="weather">Change theme based on current weather (cloudiness)</option>
         </select>
 
-        <!--
-        <br><br>
-        <p>Please enter times as a single integer, between 0 and 24:</p>
+        <p>Accent color (used for tab line and tab loading) fro Solarized theme, light then dark theme choice:</p>
+        <select id="accentColorForDark">
+          <option value="cyan" selected>Cyan</option>
+          <option value="magenta">Magenta</option>
+          <option value="yellow">Yellow</option>
+          <option value="orange">Orange</option>
+          <option value="red">Red</option>
+          <option value="violet">Violet</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </select>
+        <select id="accentColorForLight">
+          <option value="cyan">Cyan</option>
+          <option value="magenta" selected>Magenta</option>
+          <option value="yellow">Yellow</option>
+          <option value="orange">Orange</option>
+          <option value="red">Red</option>
+          <option value="violet">Violet</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </select>
+
+        <h2>Optional options:</h2>
+        <p>For time method, please enter times as a single integer, between 0 and 24:</p>
         Start of light theme: <input type="number" name="hourStart" id="hourStart"/><br>
         End of light theme: <input type="number" name="hourEnd" id="hourEnd"/><br>
-      -->
+
+        <br>
+        API Key from OpenWeatherMaps, for weather method: <input type="text" name="apiKey" id="apiKey"/>
+        
+        <br><br>
         <button type="submit">Save Settings</button>
     </form>
 
