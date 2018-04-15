@@ -9,7 +9,10 @@ function saveOptions(e) {
     "hourEnd": document.querySelector("#hourEnd").value,
     "accentColorForDark": document.querySelector("#accentColorForDark").value,
     "accentColorForLight": document.querySelector("#accentColorForLight").value,
-    "apiKey": document.querySelector("#apiKey").value
+    "apiKey": document.querySelector("#apiKey").value,
+    "lat": document.querySelector("#lat").value,
+    "long": document.querySelector("#long").value
+
   });
   console.log('save complete');
 }
@@ -19,11 +22,13 @@ function restoreOptions() {
 
   function setCurrentChoice(result) {
     document.querySelector("#method").value = result["method"] || "manual";
-    document.querySelector("#hourStart").value = result["hourStart"] || 6;
-    document.querySelector("#hourEnd").value = result["hourEnd"] || 18;
+    document.querySelector("#hourStart").value = result["hourStart"];
+    document.querySelector("#hourEnd").value = result["hourEnd"];
     document.querySelector("#accentColorForDark").value = result["accentColorForDark"] || "cyan";
     document.querySelector("#accentColorForLight").value = result["accentColorForLight"] || "magenta";
-    document.querySelector("#apiKey").value = result["apiKey"]
+    document.querySelector("#apiKey").value = result["apiKey"];
+	document.querySelector("#lat").value = result["lat"];
+	document.querySelector("#long").value = result["long"]
   }
 
   function onError(error) {
@@ -42,6 +47,10 @@ function restoreOptions() {
   accentColorForLight.then(setCurrentChoice, onError);
   let apiKey = browser.storage.local.get("apiKey");
   apiKey.then(setCurrentChoice, onError);
+  let lat = browser.storage.local.get("lat");
+  lat.then(setCurrentChoice, onError);
+  let long = browser.storage.local.get("long");
+  long.then(setCurrentChoice, onError);
 
   console.log('restore complete');
 }

@@ -1,4 +1,4 @@
-//solarized theme
+//theming
 var base03 = "#002b36";
 var base02 =  "#073642";
 var base01 =  "#586e75";
@@ -75,13 +75,23 @@ function applyDark() {
   console.log('dark theme applied');
 }
 
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////METHODS///////////////////////////////////////////
 
 const date = new Date();
 const hours = date.getHours();
 
-function timeMethod() {
-  if ((hours > 6) && (hours < 18)) {
+async function timeMethod() {
+  console.log('time method started')  
+
+  let hourStart = await browser.storage.local.get("hourStart");
+  let hourStartProp = hourStart["hourStart"];
+  let hourEnd = await browser.storage.local.get('hourEnd');
+  let hourEndProp = hourEnd["hourEnd"];
+
+  console.log(hourStartProp);
+  console.log(hourEndProp);
+
+  if ((hours > hourStartProp) && (hours < hourEndProp)) {
       applyLight();
     } else {
       applyDark();
@@ -93,6 +103,8 @@ function timeMethod() {
 
 var i = 1;
 function manualMethod() {
+  console.log('manual method started')
+
   if (i % 2 === 0) {
     applyLight();
     i++;
@@ -104,49 +116,65 @@ function manualMethod() {
   }
 }
 
-function weatherMethod() {
-  fetch('http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=8c0be18164812b760e6774e9bfee19e9')
+async function weatherMethod() {
+  console.log('weather method started')
+
+  var lat = await browser.storage.local.get("lat");
+  var latProp = lat["lat"];
+  console.log(latProp);
+  var long = await browser.storage.local.get("long");
+  var longProp = long["long"];
+  console.log(longProp);
+  var apiKey = await browser.storage.local.get('apiKey');
+  var apiKeyProp = apiKey["apiKey"];
+  console.log(apiKeyProp);
+
+  var URL = 'http://api.openweathermap.org/data/2.5/weather?lat='+latProp+'&lon='+longProp+'&APPID='+apiKeyProp;
+  console.log("URL: "+ URL);
+
+  fetch(URL)
   .then(response => response.json())
   .then(data => {
     var cloudPercent = data.clouds.all;
     console.log('cloud %: ' + cloudPercent);
 
-    if (cloudPercent < 50) {
-      applyDark();
-    } else {
+    if (cloudPercent > 50) {
       applyLight();
+    } else {
+      applyDark();
     }
     console.log('weather method complete');
+    browser.alarms.onAlarm.addListener(weatherMethod);
+    browser.alarms.create('weatherMethod', {periodInMinutes: 5});
   });
-
-  
 }
 
-//////////////////////////////////////////////////////////////////
+async function accentHandler() {
+    console.log('accent handler called');
+    let accentColorLight = await browser.storage.local.get('accentColorForLight');
+    let accentColorLightProp = accentColorLight["accentColorForLight"];
+    let accentColorDark = await browser.storage.local.get('accentColorForDark');
+    let accentColorDarkProp = accentColorDark["accentColorForDark"];
+    console.log(accentColorLightProp);
+    console.log(accentColorDarkProp);
+
+    themes['light'].colors["tab_line"] = accentColorLightProp;
+    themes['light'].colors["tab_loading"] = accentColorLightProp;
+    themes['light'].colors["icons_attention"] = accentColorLightProp;
+
+    themes['dark'].colors["tab_line"] = accentColorDarkProp;
+    themes['dark'].colors["tab_loading"] = accentColorDarkProp;
+    themes['dark'].colors["icons_attention"] = accentColorDarkProp;
+
+    console.log('accents set');
+}
+
+/////////////////////////////ACTUAL WORK/////////////////////////////////////
 
 async function methodHandler() {
   console.log("method handler called");
   let method = await browser.storage.local.get("method");
-
-  function accentHandler() {
-    console.log('accent handler called');
-    var accentColorLight = browser.storage.local.get('accentColorForLight');
-    var accentColorDark = browser.storage.local.get('accentColorForLight');
-
-    for (let i = 0; i < themes['light'].colors.length; i++) {
-      if (themes['light'].colors[i] === magenta) {
-        themes['light'].colors[i] = accentColorLight;
-      }
-    }
-    for (let i = 0; i < themes['dark'].colors.length; i++) {
-      if (themes['dark'].colors[i] === cyan) {
-        themes['dark'].colors[i] = accentColorDark;
-      }
-    }  
-  }
-  accentHandler();
-
-  
+    
   let methodProp = method["method"];
   console.log(methodProp);
 
@@ -159,18 +187,15 @@ async function methodHandler() {
   } else if (methodProp == "weather") {
     console.log("weather method selected");
     weatherMethod();
-  } else if (methodProp == "site") {
-
   }
-
 }
 
-applyLight();
-methodHandler();
-
-function reapply() {
-  console.log('started reapply');
+function apply() {
+  console.log('started apply');
+  applyLight();
+  accentHandler();
   methodHandler();
 }
 
-browser.storage.onChanged.addListener(reapply);
+apply()
+browser.storage.onChanged.addListener(apply);

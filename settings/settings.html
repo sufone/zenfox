@@ -7,42 +7,46 @@
   <body>
     <h1>Settings</h1>
     <form>
-        <p>For your zen, choose a method:</p>
+        For your zen, choose a <strong>method:</strong>
         <select id="method">
-          <option value="manual">Manually toggle using toolbar button</option>
-          <option selected value="time">Automatically switch between themes at 6am/pm</option>
-          <option value="weather">Change theme based on current weather (cloudiness)</option>
+          <option value="manual">Manual</option>
+          <option selected value="time">Time (Custom)</option>
+          <option value="weather">Weather (Cloudiness)</option>
         </select>
 
-        <p>Accent color (used for tab line and tab loading) fro Solarized theme, light then dark theme choice:</p>
-        <select id="accentColorForDark">
-          <option value="cyan" selected>Cyan</option>
-          <option value="magenta">Magenta</option>
-          <option value="yellow">Yellow</option>
-          <option value="orange">Orange</option>
-          <option value="red">Red</option>
-          <option value="violet">Violet</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
+        <br>
+        <p><strong>Tab line color</strong> from Solarized theme:</p>
+        <em>light</em> theme accent: <select id="accentColorForDark">
+          <option value="#2aa198" selected>Cyan</option>
+          <option value="#d33682">Magenta</option>
+          <option value="#b58900">Yellow</option>
+          <option value="#cb4b16">Orange</option>
+          <option value="#dc322f">Red</option>
+          <option value="#6c71c4">Violet</option>
+          <option value="#268bd2">Blue</option>
+          <option value="#859900">Green</option>
         </select>
-        <select id="accentColorForLight">
-          <option value="cyan">Cyan</option>
-          <option value="magenta" selected>Magenta</option>
-          <option value="yellow">Yellow</option>
-          <option value="orange">Orange</option>
-          <option value="red">Red</option>
-          <option value="violet">Violet</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
+        <em>dark</em> theme accent: <select id="accentColorForLight">
+          <option value="#2aa198">Cyan</option>
+          <option value="#d33682" selected>Magenta</option>
+          <option value="#b58900">Yellow</option>
+          <option value="#cb4b16">Orange</option>
+          <option value="#dc322f">Red</option>
+          <option value="#6c71c4">Violet</option>
+          <option value="#268bd2">Blue</option>
+          <option value="#859900">Green</option>
         </select>
 
         <h2>Optional options:</h2>
-        <p>For time method, please enter times as a single integer, between 0 and 24:</p>
-        Start of light theme: <input type="number" name="hourStart" id="hourStart"/><br>
-        End of light theme: <input type="number" name="hourEnd" id="hourEnd"/><br>
+        <p>For <strong>time method</strong>, please enter times as a single integer, between 0 and 24:</p>
+        Start of <em>light</em> theme: <input type="number" name="hourStart" id="hourStart"/>
+        Start of <em>dark</em> theme: <input type="number" name="hourEnd" id="hourEnd"/>
 
+        <br><br>
+        For <strong>weather method</strong>; API Key from your OpenWeatherMaps account: <input type="text" name="apiKey" id="apiKey"/>
         <br>
-        API Key from OpenWeatherMaps, for weather method: <input type="text" name="apiKey" id="apiKey"/>
+        Your location:
+        Lattitude: <input type="number" name="lat" id="lat"/> Longitude: <input type="number" name="long" id="long"/>
         
         <br><br>
         <button type="submit">Save Settings</button>
