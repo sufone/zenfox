@@ -193,8 +193,8 @@ async function methodHandler() {
 function apply() {
   console.log('started apply');
   applyLight();
-  accentHandler();
   methodHandler();
+  accentHandler();
 }
 
 apply()

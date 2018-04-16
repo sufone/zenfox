@@ -21,11 +21,11 @@ function restoreOptions() {
   console.log('restore start');
 
   function setCurrentChoice(result) {
-    document.querySelector("#method").value = result["method"] || "manual";
+    document.querySelector("#method").value = result["method"];
     document.querySelector("#hourStart").value = result["hourStart"];
     document.querySelector("#hourEnd").value = result["hourEnd"];
-    document.querySelector("#accentColorForDark").value = result["accentColorForDark"] || "cyan";
-    document.querySelector("#accentColorForLight").value = result["accentColorForLight"] || "magenta";
+    document.querySelector("#accentColorForDark").value = result["accentColorForDark"];
+    document.querySelector("#accentColorForLight").value = result["accentColorForLight"];
     document.querySelector("#apiKey").value = result["apiKey"];
 	document.querySelector("#lat").value = result["lat"];
 	document.querySelector("#long").value = result["long"]
