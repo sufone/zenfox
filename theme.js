@@ -92,14 +92,15 @@ async function timeMethod() {
     } else {
       applyDark();
     }
-    console.log('timeMethod used');
-    browser.alarms.onAlarm.addListener(timeMethod);
-    browser.alarms.create('timeMethod', {periodInMinutes: 5});
+
+  console.log('timeMethod complete');
+  browser.alarms.onAlarm.addListener(timeMethod);
+  browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
 
 var i = 1;
 function manualMethod() {
-  console.log('manual method started')
+  console.log('manual method started');
 
   if (i % 2 === 0) {
     applyLight();
@@ -139,9 +140,10 @@ async function weatherMethod() {
     } else {
       applyDark();
     }
-    console.log('weather method complete');
+
     browser.alarms.onAlarm.addListener(weatherMethod);
     browser.alarms.create('weatherMethod', {periodInMinutes: 5});
+    console.log('weather method complete');
   });
 }
 
@@ -167,6 +169,11 @@ async function accentHandler() {
     console.log('accents set');
 }
 
+function openSettings() {
+  browser.runtime.openOptionsPage();
+  console.log('settings opened');
+}
+
 async function methodHandler() {
   console.log("method handler called");
   let method = await browser.storage.local.get("method");
@@ -176,13 +183,23 @@ async function methodHandler() {
 
   if (methodProp == "manual") {
     console.log("manual method selected");
+    browser.browserAction.setTitle({title: "Zen Fox: Manual"});
+    browser.browserAction.onClicked.removeListener(openSettings)
     browser.browserAction.onClicked.addListener(manualMethod);
-  } else if (methodProp == "time") {
+  } 
+  else if (methodProp == "time") {
     console.log("time method selected");
-    timeMethod()
-  } else if (methodProp == "weather") {
+    browser.browserAction.setTitle({title: "Zen Fox: Time"});
+    timeMethod();
+    browser.browserAction.onClicked.removeListener(manualMethod);
+    browser.browserAction.onClicked.addListener(openSettings);
+  } 
+  else if (methodProp == "weather") {
     console.log("weather method selected");
+    browser.browserAction.setTitle({title: "Zen Fox: Weather"});
     weatherMethod();
+    browser.browserAction.onClicked.removeListener(manualMethod);
+    browser.browserAction.onClicked.addListener(openSettings);
   }
 }
 
@@ -192,5 +209,6 @@ function apply() {
   methodHandler();
 }
 
-apply()
+apply();
+openSettings();
 browser.storage.onChanged.addListener(apply);
