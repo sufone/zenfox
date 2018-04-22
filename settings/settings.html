@@ -5,7 +5,15 @@
   </head>
 
   <body>
-    <h1>Settings</h1>
+    <strong>Notes:</strong>
+    <br>
+    <em>Whatever settings chosen, the save options button below must be pressed.</em>
+    <br>
+    <em>Accent settings will be applied on next theme change.</em>
+        <br><br><br>
+
+
+    <h1>Settings</h1>    
     <form>
         For your zen, choose a <strong>method:</strong>
         <select id="method">
@@ -15,7 +23,7 @@
         </select>
 
         <br>
-        <p><strong>Tab line color</strong> from Solarized theme:</p>
+        <strong>Tab line color</strong> from Solarized theme:
         <em>light</em> theme accent: <select id="accentColorForLight">
           <option value="#2aa198" selected>Cyan</option>
           <option value="#d33682">Magenta</option>
@@ -38,12 +46,13 @@
         </select>
 
         <h2>Optional options:</h2>
-        <p>For <strong>time method</strong>, please enter times as a single integer, between 0 and 24:</p>
+        For <strong>time method</strong>, please enter times as a single integer, between 0 and 24:
+        <br>
         Start of <em>light</em> theme: <input type="number" name="hourStart" id="hourStart"/>
         Start of <em>dark</em> theme: <input type="number" name="hourEnd" id="hourEnd"/>
 
         <br><br>
-        For <strong>weather method</strong>; API Key from your OpenWeatherMaps account: <input type="text" name="apiKey" id="apiKey"/>
+        For <strong>weather method</strong> API Key from your OpenWeatherMaps account: <input type="text" name="apiKey" id="apiKey"/>
         <br>
         Your location:
         Lattitude: <input type="number" name="lat" id="lat"/> Longitude: <input type="number" name="long" id="long"/>

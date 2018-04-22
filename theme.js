@@ -58,10 +58,6 @@ const themes = {
 };
 
 function setTheme(theme) {
-  if (currentTheme === theme) {
-    // No point in changing the theme if it has already been set.
-    return;
-  }
   currentTheme = theme;
   browser.theme.update(themes[theme]);
 }
@@ -149,6 +145,8 @@ async function weatherMethod() {
   });
 }
 
+/////////////////////////////ACTUAL WORK/////////////////////////////////////
+
 async function accentHandler() {
     console.log('accent handler called');
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
@@ -168,8 +166,6 @@ async function accentHandler() {
 
     console.log('accents set');
 }
-
-/////////////////////////////ACTUAL WORK/////////////////////////////////////
 
 async function methodHandler() {
   console.log("method handler called");
@@ -192,9 +188,8 @@ async function methodHandler() {
 
 function apply() {
   console.log('started apply');
-  applyLight();
-  methodHandler();
   accentHandler();
+  methodHandler();
 }
 
 apply()
