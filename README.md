@@ -21,6 +21,10 @@ Permissions:
 * Alarm — to set internal timers that check for weather/time updates
 * Storage — to store your settings 
 
+## Solarized Theme
+[Solarized theme](http://ethanschoonover.com/solarized)
+[Solarized repo](https://github.com/altercation/ethanschoonover.com/tree/master/projects/solarized)
+
 ## Installation
 From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/)
 
