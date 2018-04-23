@@ -8,18 +8,28 @@ Methods:
 
 Choose from 3 different methods to switch between Dark & Light Themes:
 
-    Manual — toolbar button to switch themes upon press
-    Time — change themes automatically at times of your choice
-    Weather — update theme based on current cloudiness at your locale
+* Manual — toolbar button to switch themes upon press
+* Time — change themes automatically at times of your choice
+* Weather — update theme based on current cloudiness at your locale
 
 
 Also, you can now choose the accent color, that is used for your tab line, tab loading, and icon attention colors.
 
 Permissions:
 
-    Theme — to… theme
-    Alarm — to set internal timers that check for weather/time updates
-    Storage — to store your settings 
+* Theme — to… theme
+* Alarm — to set internal timers that check for weather/time updates
+* Storage — to store your settings 
+
+## Installation
+From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/)
+
+## Dev
+1. Donwload repo as zip, 
+2. go to `about:debugging`, 
+3. select any file of the add-on (eg. `manifest.json`)
+4. ???
+5. Profit
 
 
 No unnecessary permissions are required by Zen Fox, and all the code is open source.
