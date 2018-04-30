@@ -53,7 +53,7 @@ const themes = {
       "icons_attention": cyan,
       "toolbar_vertical_separator": base02,
       "toolbar_field_separator": base03
-    }, 
+    },
   }
 };
 
@@ -71,13 +71,13 @@ function applyDark() {
   console.log('dark theme applied');
 }
 
-////////////////////////////////////METHODS///////////////////////////////////////////
+////////////////////////////////////METHODS///////////////////////////////////
 
 const date = new Date();
 const hours = date.getHours();
 
 async function timeMethod() {
-  console.log('time method started')  
+  console.log('time method started')
 
   let hourStart = await browser.storage.local.get("hourStart");
   let hourStartProp = hourStart["hourStart"];
@@ -177,7 +177,7 @@ function openSettings() {
 async function methodHandler() {
   console.log("method handler called");
   let method = await browser.storage.local.get("method");
-    
+
   let methodProp = method["method"];
   console.log(methodProp);
 
@@ -186,14 +186,14 @@ async function methodHandler() {
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
     browser.browserAction.onClicked.removeListener(openSettings)
     browser.browserAction.onClicked.addListener(manualMethod);
-  } 
+  }
   else if (methodProp == "time") {
     console.log("time method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Time"});
     timeMethod();
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
-  } 
+  }
   else if (methodProp == "weather") {
     console.log("weather method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Weather"});

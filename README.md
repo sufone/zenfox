@@ -24,6 +24,6 @@ Permissions:
 
 No unnecessary permissions are required by Zen Fox, and all the code is open source.
 
-Recommended add-ons to go with it:
+Recommended add-ons to go with it (but require some configuration from you):
 - Vivaldi fox: set theme based on current site
 - Stylus: modify site style to be how you like
