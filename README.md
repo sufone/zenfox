@@ -31,8 +31,8 @@ From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/)
 
 ## Dev
 1. Donwload repo as zip, 
-2. go to `about:debugging`, 
-3. select any file of the add-on (eg. `manifest.json`)
+2. Open firefox, and go to `about:debugging` in a new tab, 
+3. Select any file of the add-on (eg. `manifest.json`)
 4. ???
 5. Profit
 
