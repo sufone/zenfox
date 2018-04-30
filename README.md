@@ -23,6 +23,7 @@ Permissions:
 
 ## Solarized Theme
 [Solarized theme](http://ethanschoonover.com/solarized)
+
 [Solarized repo](https://github.com/altercation/ethanschoonover.com/tree/master/projects/solarized)
 
 ## Installation
