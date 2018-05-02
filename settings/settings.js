@@ -58,7 +58,9 @@ function saveOptions(e) {
     "apiKey": document.querySelector("#apiKey").value,
     "lat": document.querySelector("#lat").value,
     "long": document.querySelector("#long").value
-  }, function() {
+  }, async function() {
+    const storage = await browser.storage.local.get("currentTheme");
+    browser.theme.update(storage.themes[storage.currentTheme]);
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
