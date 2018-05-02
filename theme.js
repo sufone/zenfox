@@ -61,7 +61,6 @@ function setTheme(theme) {
   currentTheme = theme;
   browser.theme.update(themes[theme]);
 }
-
 function applyLight() {
   setTheme('light');
   console.log('light theme applied')
@@ -93,7 +92,7 @@ async function timeMethod() {
       applyDark();
     }
 
-  console.log('timeMethod complete');
+  console.log('<--- timeMethod complete');
   browser.alarms.onAlarm.addListener(timeMethod);
   browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
@@ -101,15 +100,14 @@ async function timeMethod() {
 var i = 1;
 function manualMethod() {
   console.log('manual method started');
-
   if (i % 2 === 0) {
     applyLight();
     i++;
-    console.log("light theme applied, i iterated to:" + i);
+    console.log("<--- manual, light theme applied, i iterated to:" + i);
   } else {
     applyDark();
     i++;
-    console.log("dark theme applied, i iterated to:" + i);
+    console.log("<--- manual, dark theme applied, i iterated to:" + i);
   }
 }
 
@@ -127,7 +125,7 @@ async function weatherMethod() {
   console.log(apiKeyProp);
 
   var URL = 'http://api.openweathermap.org/data/2.5/weather?lat='+latProp+'&lon='+longProp+'&APPID='+apiKeyProp;
-  console.log("URL: "+ URL);
+  console.log("weather URL: "+ URL);
 
   fetch(URL)
   .then(response => response.json())
@@ -143,20 +141,20 @@ async function weatherMethod() {
 
     browser.alarms.onAlarm.addListener(weatherMethod);
     browser.alarms.create('weatherMethod', {periodInMinutes: 5});
-    console.log('weather method complete');
+    console.log('<---weather method complete');
   });
 }
 
 /////////////////////////////ACTUAL WORK/////////////////////////////////////
 
 async function accentHandler() {
-    console.log('accent handler called');
+    console.log('--->accent handler called');
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
     let accentColorLightProp = accentColorLight["accentColorForLight"];
     let accentColorDark = await browser.storage.local.get('accentColorForDark');
     let accentColorDarkProp = accentColorDark["accentColorForDark"];
-    console.log(accentColorLightProp);
-    console.log(accentColorDarkProp);
+    console.log('light accent: ' + accentColorLightProp);
+    console.log('dark accent: ' + accentColorDarkProp);
 
     themes['light'].colors["tab_line"] = accentColorLightProp;
     themes['light'].colors["tab_loading"] = accentColorLightProp;
@@ -166,16 +164,16 @@ async function accentHandler() {
     themes['dark'].colors["tab_loading"] = accentColorDarkProp;
     themes['dark'].colors["icons_attention"] = accentColorDarkProp;
 
-    console.log('accents set');
+    console.log('<---accents set');
 }
 
 function openSettings() {
   browser.runtime.openOptionsPage();
-  console.log('settings opened');
+  console.log('---settings opened');
 }
 
 async function methodHandler() {
-  console.log("method handler called");
+  console.log("--->method handler called");
   const method = await browser.storage.local.get("method");
 
   const methodProp = method["method"];
@@ -205,7 +203,7 @@ async function methodHandler() {
 }
 
 function apply() {
-  console.log('started apply');
+  console.log('---started apply');
   accentHandler();
   methodHandler();
 }
