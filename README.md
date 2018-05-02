@@ -4,7 +4,7 @@ As we spend more and more of our lives computing, and more and more of our compu
 
 Zen Fox uses the stunning Solarized Theme, ported to Firefox using it's latest APIs. That means browser menus like the hamburger and overflow are themed to suit the rest of your browser.
 
-Methods:
+**Methods**:
 
 Choose from 3 different methods to switch between Dark & Light Themes:
 
@@ -15,27 +15,28 @@ Choose from 3 different methods to switch between Dark & Light Themes:
 
 Also, you can now choose the accent color, that is used for your tab line, tab loading, and icon attention colors.
 
-Permissions:
+**Permissions**:
 
-* Theme — to… theme
 * Alarm — to set internal timers that check for weather/time updates
 * Storage — to store your settings 
+* Theme — to… theme
 
-## Solarized Theme
-[Solarized theme](http://ethanschoonover.com/solarized)
-[Solarized repo](https://github.com/altercation/ethanschoonover.com/tree/master/projects/solarized)
+## Solarized References
+* [Solarized theme website](http://ethanschoonover.com/solarized)
+
+* [Solarized theme repo](https://github.com/altercation/ethanschoonover.com/tree/master/projects/solarized)
 
 ## Installation
-From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/)
+From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/). Alternatively, see dev instructions:
 
 ## Dev
 1. Donwload repo as zip, 
-2. go to `about:debugging`, 
-3. select any file of the add-on (eg. `manifest.json`)
+2. Open firefox, and go to `about:debugging` in a new tab, 
+3. Select any file of the add-on (eg. `manifest.json`) and open it from the file picker
 4. ???
 5. Profit
 
-
+## Extra Details
 No unnecessary permissions are required by Zen Fox, and all the code is open source.
 
 Recommended add-ons to go with it (but require some configuration from you):
