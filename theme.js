@@ -176,15 +176,16 @@ function openSettings() {
 
 async function methodHandler() {
   console.log("method handler called");
-  let method = await browser.storage.local.get("method");
+  const method = await browser.storage.local.get("method");
 
-  let methodProp = method["method"];
+  const methodProp = method["method"];
   console.log(methodProp);
 
   if (methodProp == "manual") {
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
-    browser.browserAction.onClicked.removeListener(openSettings)
+    applyLight();
+    browser.browserAction.onClicked.removeListener(openSettings);
     browser.browserAction.onClicked.addListener(manualMethod);
   }
   else if (methodProp == "time") {
