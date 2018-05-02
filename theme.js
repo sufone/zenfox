@@ -16,7 +16,6 @@ var blue =    "#268bd2";
 var cyan =    "#2aa198";
 var green =   "#859900";
 
-var currentTheme = '';
 
 const themes = {
   'light': {
@@ -57,9 +56,15 @@ const themes = {
   }
 };
 
-function setTheme(theme) {
-  currentTheme = theme;
-  browser.theme.update(themes[theme]);
+async function setTheme(theme) {
+  let currentTheme
+  if (!theme) {
+    const storage = await browser.storage.local.get("currentTheme");
+    currentTheme = storage.currentTheme || "dark";
+  }
+  else currentTheme = theme;
+  browser.theme.update(themes[currentTheme]);
+  await browser.storage.local.set({currentTheme});
 }
 
 function applyLight() {
@@ -98,19 +103,13 @@ async function timeMethod() {
   browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
 
-var i = 1;
-function manualMethod() {
+async function manualMethod() {
   console.log('manual method started');
+  const storage = await browser.storage.local.get("currentTheme");
 
-  if (i % 2 === 0) {
-    applyLight();
-    i++;
-    console.log("light theme applied, i iterated to:" + i);
-  } else {
-    applyDark();
-    i++;
-    console.log("dark theme applied, i iterated to:" + i);
-  }
+  if (storage.currentTheme === "dark") applyLight();
+  else applyDark();
+  console.log(`${storage.currentTheme} applied`)
 }
 
 async function weatherMethod() {
@@ -178,12 +177,13 @@ async function methodHandler() {
   console.log("method handler called");
   let method = await browser.storage.local.get("method");
 
-  let methodProp = method["method"];
+  let methodProp = method["method"] || "manual";
   console.log(methodProp);
 
   if (methodProp == "manual") {
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
+    await setTheme();
     browser.browserAction.onClicked.removeListener(openSettings)
     browser.browserAction.onClicked.addListener(manualMethod);
   }
@@ -211,4 +211,3 @@ function apply() {
 
 apply();
 openSettings();
-browser.storage.onChanged.addListener(apply);
