@@ -35,9 +35,13 @@ From [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/zen-fox/)
 4. ???
 5. Profit
 
-
+### Extra Talk
 No unnecessary permissions are required by Zen Fox, and all the code is open source.
 
 Recommended add-ons to go with it (but require some configuration from you):
 - Vivaldi fox: set theme based on current site
 - Stylus: modify site style to be how you like
+
+*This extension can basically be forked and have the theme definitons replaced
+and serve as kind of the template for dynamic Firefox themes of any color
+scheme.*
