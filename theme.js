@@ -1,5 +1,5 @@
 //theming
-var base03 = "#002b36";
+var base03 =  "#002b36";
 var base02 =  "#073642";
 var base01 =  "#586e75";
 var base00 =  "#657b83";
@@ -103,11 +103,11 @@ function manualMethod() {
   if (i % 2 === 0) {
     applyLight();
     i++;
-    console.log("<--- manual, light theme applied, i iterated to:" + i);
+    console.log("<--- manual done, i iterated to:" + i);
   } else {
     applyDark();
     i++;
-    console.log("<--- manual, dark theme applied, i iterated to:" + i);
+    console.log("<--- manual done, i iterated to:" + i);
   }
 }
 
@@ -133,7 +133,7 @@ async function weatherMethod() {
     var cloudPercent = data.clouds.all;
     console.log('cloud %: ' + cloudPercent);
 
-    if (cloudPercent > 50) {
+    if (cloudPercent < 50) {
       applyLight();
     } else {
       applyDark();
@@ -149,10 +149,13 @@ async function weatherMethod() {
 
 async function accentHandler() {
     console.log('--->accent handler called');
+
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
     let accentColorLightProp = accentColorLight["accentColorForLight"];
+
     let accentColorDark = await browser.storage.local.get('accentColorForDark');
     let accentColorDarkProp = accentColorDark["accentColorForDark"];
+
     console.log('light accent: ' + accentColorLightProp);
     console.log('dark accent: ' + accentColorDarkProp);
 
@@ -177,19 +180,21 @@ async function methodHandler() {
   const method = await browser.storage.local.get("method");
 
   const methodProp = method["method"];
-  console.log(methodProp);
+  console.log('method: '+methodProp);
 
   if (methodProp == "manual") {
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
-    applyLight();
-    browser.browserAction.onClicked.removeListener(openSettings);
+    applyLight(); //otherwise, nothing is applied at install/startup. Confusing.
+
+    browser.browserAction.onClicked.removeListener(openSettings); //otherwise, it would do both
     browser.browserAction.onClicked.addListener(manualMethod);
   }
   else if (methodProp == "time") {
     console.log("time method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Time"});
     timeMethod();
+
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
   }
@@ -197,6 +202,7 @@ async function methodHandler() {
     console.log("weather method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Weather"});
     weatherMethod();
+
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
   }
