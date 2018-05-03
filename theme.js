@@ -1,5 +1,5 @@
 //theming
-var base03 = "#002b36";
+var base03 =  "#002b36";
 var base02 =  "#073642";
 var base01 =  "#586e75";
 var base00 =  "#657b83";
@@ -61,7 +61,6 @@ function setTheme(theme) {
   currentTheme = theme;
   browser.theme.update(themes[theme]);
 }
-
 function applyLight() {
   setTheme('light');
   console.log('light theme applied')
@@ -93,7 +92,7 @@ async function timeMethod() {
       applyDark();
     }
 
-  console.log('timeMethod complete');
+  console.log('<--- timeMethod complete');
   browser.alarms.onAlarm.addListener(timeMethod);
   browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
@@ -101,15 +100,14 @@ async function timeMethod() {
 var i = 1;
 function manualMethod() {
   console.log('manual method started');
-
   if (i % 2 === 0) {
     applyLight();
     i++;
-    console.log("light theme applied, i iterated to:" + i);
+    console.log("<--- manual done, i iterated to:" + i);
   } else {
     applyDark();
     i++;
-    console.log("dark theme applied, i iterated to:" + i);
+    console.log("<--- manual done, i iterated to:" + i);
   }
 }
 
@@ -127,7 +125,7 @@ async function weatherMethod() {
   console.log(apiKeyProp);
 
   var URL = 'http://api.openweathermap.org/data/2.5/weather?lat='+latProp+'&lon='+longProp+'&APPID='+apiKeyProp;
-  console.log("URL: "+ URL);
+  console.log("weather URL: "+ URL);
 
   fetch(URL)
   .then(response => response.json())
@@ -135,7 +133,7 @@ async function weatherMethod() {
     var cloudPercent = data.clouds.all;
     console.log('cloud %: ' + cloudPercent);
 
-    if (cloudPercent > 50) {
+    if (cloudPercent < 50) {
       applyLight();
     } else {
       applyDark();
@@ -143,20 +141,23 @@ async function weatherMethod() {
 
     browser.alarms.onAlarm.addListener(weatherMethod);
     browser.alarms.create('weatherMethod', {periodInMinutes: 5});
-    console.log('weather method complete');
+    console.log('<---weather method complete');
   });
 }
 
 /////////////////////////////ACTUAL WORK/////////////////////////////////////
 
 async function accentHandler() {
-    console.log('accent handler called');
+    console.log('--->accent handler called');
+
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
     let accentColorLightProp = accentColorLight["accentColorForLight"];
+
     let accentColorDark = await browser.storage.local.get('accentColorForDark');
     let accentColorDarkProp = accentColorDark["accentColorForDark"];
-    console.log(accentColorLightProp);
-    console.log(accentColorDarkProp);
+
+    console.log('light accent: ' + accentColorLightProp);
+    console.log('dark accent: ' + accentColorDarkProp);
 
     themes['light'].colors["tab_line"] = accentColorLightProp;
     themes['light'].colors["tab_loading"] = accentColorLightProp;
@@ -166,31 +167,34 @@ async function accentHandler() {
     themes['dark'].colors["tab_loading"] = accentColorDarkProp;
     themes['dark'].colors["icons_attention"] = accentColorDarkProp;
 
-    console.log('accents set');
+    console.log('<---accents set');
 }
 
 function openSettings() {
   browser.runtime.openOptionsPage();
-  console.log('settings opened');
+  console.log('---settings opened');
 }
 
 async function methodHandler() {
-  console.log("method handler called");
-  let method = await browser.storage.local.get("method");
+  console.log("--->method handler called");
+  const method = await browser.storage.local.get("method");
 
-  let methodProp = method["method"];
-  console.log(methodProp);
+  const methodProp = method["method"];
+  console.log('method: '+methodProp);
 
   if (methodProp == "manual") {
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
-    browser.browserAction.onClicked.removeListener(openSettings)
+    applyLight(); //otherwise, nothing is applied at install/startup. Confusing.
+
+    browser.browserAction.onClicked.removeListener(openSettings); //otherwise, it would do both
     browser.browserAction.onClicked.addListener(manualMethod);
   }
   else if (methodProp == "time") {
     console.log("time method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Time"});
     timeMethod();
+
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
   }
@@ -198,13 +202,14 @@ async function methodHandler() {
     console.log("weather method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Weather"});
     weatherMethod();
+
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
   }
 }
 
 function apply() {
-  console.log('started apply');
+  console.log('---started apply');
   accentHandler();
   methodHandler();
 }
