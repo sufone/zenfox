@@ -16,8 +16,6 @@ var blue =    "#268bd2";
 var cyan =    "#2aa198";
 var green =   "#859900";
 
-var currentTheme = '';
-
 const themes = {
   'light': {
     colors: {
@@ -58,16 +56,9 @@ const themes = {
 };
 
 function setTheme(theme) {
-  currentTheme = theme;
+  browser.storage.local.set({'currentTheme': theme});
   browser.theme.update(themes[theme]);
-}
-function applyLight() {
-  setTheme('light');
-  console.log('light theme applied')
-}
-function applyDark() {
-  setTheme('dark');
-  console.log('dark theme applied');
+  console.log('theme:' + theme + 'applied');
 }
 
 ////////////////////////////////////METHODS///////////////////////////////////
@@ -87,9 +78,9 @@ async function timeMethod() {
   console.log(hourEndProp);
 
   if ((hours > hourStartProp) && (hours < hourEndProp)) {
-      applyLight();
+      setTheme('light');
     } else {
-      applyDark();
+      setTheme('dark');
     }
 
   console.log('<--- timeMethod complete');
@@ -101,11 +92,11 @@ var i = 1;
 function manualMethod() {
   console.log('manual method started');
   if (i % 2 === 0) {
-    applyLight();
+    setTheme('light');
     i++;
     console.log("<--- manual done, i iterated to:" + i);
   } else {
-    applyDark();
+    setTheme('dark');
     i++;
     console.log("<--- manual done, i iterated to:" + i);
   }
@@ -134,9 +125,9 @@ async function weatherMethod() {
     console.log('cloud %: ' + cloudPercent);
 
     if (cloudPercent < 50) {
-      applyLight();
+      setTheme('light');
     } else {
-      applyDark();
+      setTheme('dark');
     }
 
     browser.alarms.onAlarm.addListener(weatherMethod);
@@ -185,10 +176,19 @@ async function methodHandler() {
   if (methodProp == "manual") {
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
-    applyLight(); //otherwise, nothing is applied at install/startup. Confusing.
+    const currentTheme = await browser.storage.local.get("currentTheme");
+    const currentThemeProp = currentTheme["currentTheme"];
 
     browser.browserAction.onClicked.removeListener(openSettings); //otherwise, it would do both
     browser.browserAction.onClicked.addListener(manualMethod);
+    switch (currentThemeProp) {
+      case 'light':
+        setTheme('light');
+        break;
+      case 'dark':
+        setTheme('dark');
+        break;
+    };
   }
   else if (methodProp == "time") {
     console.log("time method selected");
@@ -216,4 +216,4 @@ function apply() {
 
 apply();
 openSettings();
-browser.storage.onChanged.addListener(apply);
+browser.runtime.onMessage.addListener(apply);

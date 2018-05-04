@@ -16,6 +16,8 @@ function saveOptions(e) {
     setTimeout(function() {
       status.textContent = '';
     }, 750);
+    browser.runtime.sendMessage('update');
+    console.log('message sent');
   });
 }
 
