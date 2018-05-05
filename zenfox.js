@@ -74,8 +74,8 @@ async function timeMethod() {
   let hourEnd = await browser.storage.local.get('hourEnd');
   let hourEndProp = hourEnd["hourEnd"];
 
-  console.log(hourStartProp);
-  console.log(hourEndProp);
+  console.log('hourStart: '+hourStartProp);
+  console.log('hourEnd: '+hourEndProp);
 
   if ((hours > hourStartProp) && (hours < hourEndProp)) {
       setTheme('light');
