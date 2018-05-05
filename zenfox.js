@@ -84,6 +84,7 @@ async function timeMethod() {
     }
 
   console.log('<--- timeMethod complete');
+  browser.alarms.clear('weatherMethod');
   browser.alarms.onAlarm.addListener(timeMethod);
   browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
@@ -126,6 +127,7 @@ async function weatherMethod() {
       setTheme('dark');
     }
 
+    browser.alarms.clear('timeMethod');
     browser.alarms.onAlarm.addListener(weatherMethod);
     browser.alarms.create('weatherMethod', {periodInMinutes: 5});
     console.log('<---weather method complete');
