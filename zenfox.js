@@ -212,12 +212,6 @@ function apply() {
   methodHandler();
 }
 
-/*browser.storage.local.set({ //default settings
-  "method": 'manual',
-  "accentColorForLight": '#d33682',
-  "accentColorForDark": '#2aa198'
-})*/
-
 apply();
 openSettings();
 browser.runtime.onMessage.addListener(apply);
