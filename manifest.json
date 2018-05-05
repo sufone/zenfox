@@ -9,7 +9,7 @@
     "alarms"
   ],
   "background": {
-    "scripts": ["theme.js"]
+    "scripts": ["zenfox.js"]
   },
   "icons": {
     "48": "icons/48.png",
@@ -23,7 +23,7 @@
   "options_ui": {
     "page": "settings/settings.html"
   },
-  "version": "1.6",
+  "version": "1.8.1",
   "applications": {
     "gecko": {
       "strict_min_version": "60.0"
