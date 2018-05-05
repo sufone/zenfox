@@ -88,17 +88,13 @@ async function timeMethod() {
   browser.alarms.create('timeMethod', {periodInMinutes: 5});
 }
 
-var i = 1;
-function manualMethod() {
-  console.log('manual method started');
-  if (i % 2 === 0) {
-    setTheme('light');
-    i++;
-    console.log("<--- manual done, i iterated to:" + i);
-  } else {
-    setTheme('dark');
-    i++;
-    console.log("<--- manual done, i iterated to:" + i);
+async function manualMethod() {
+  const currentTheme = await browser.storage.local.get("currentTheme");
+  const currentThemeProp = currentTheme["currentTheme"];
+
+  switch (currentThemeProp) {
+    case 'light': setTheme('dark'); break;
+    case 'dark': setTheme('light'); break;
   }
 }
 
@@ -107,10 +103,10 @@ async function weatherMethod() {
 
   var lat = await browser.storage.local.get("lat");
   var latProp = lat["lat"];
-  console.log(latProp);
+  console.log('lat:'+latProp);
   var long = await browser.storage.local.get("long");
   var longProp = long["long"];
-  console.log(longProp);
+  console.log('long:'+longProp);
   var apiKey = await browser.storage.local.get('apiKey');
   var apiKeyProp = apiKey["apiKey"];
   console.log(apiKeyProp);
@@ -174,17 +170,19 @@ async function methodHandler() {
   console.log('method: '+methodProp);
 
   if (methodProp == "manual") {
+    const currentTheme = await browser.storage.local.get("currentTheme"); 
+    const currentThemeProp = currentTheme["currentTheme"]; //repeated from above… but too annoying
+
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
-    const currentTheme = await browser.storage.local.get("currentTheme");
-    const currentThemeProp = currentTheme["currentTheme"];
-
     browser.browserAction.onClicked.removeListener(openSettings); //otherwise, it would do both
     browser.browserAction.onClicked.addListener(manualMethod);
+    //meant for browser startup, sets last used theme:
     switch (currentThemeProp) {
       case 'light':
         setTheme('light');
         break;
+      default:
       case 'dark':
         setTheme('dark');
         break;
@@ -214,6 +212,11 @@ function apply() {
   methodHandler();
 }
 
+browser.storage.local.set({ //default settings
+  "method": 'manual',
+  "accentColorForLight": '#d33682',
+  "accentColorForDark": '#2aa198'
+})
 apply();
 openSettings();
 browser.runtime.onMessage.addListener(apply);
