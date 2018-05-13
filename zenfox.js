@@ -159,9 +159,15 @@ async function accentHandler() {
     console.log('<---accents set');
 }
 
-function openSettings() {
-  browser.runtime.openOptionsPage();
-  console.log('---settings opened');
+async function openSettings() {
+  let initializedCheck = await browser.storage.local.get("initialized");
+  let initializedCheckProp = initializedCheck["initialized"];
+
+  if (initializedCheckProp != "yes") {
+    browser.runtime.openOptionsPage();
+  } 
+  browser.storage.local.set({"initialized": "yes"});
+  console.log('---openSettingsRun');
 }
 
 async function methodHandler() {
