@@ -140,10 +140,10 @@ async function accentHandler() {
     console.log('--->accent handler called');
 
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
-    let accentColorLightProp = accentColorLight["accentColorForLight"];
+    let accentColorLightProp = accentColorLight["accentColorForLight"] || "#d33682";
 
     let accentColorDark = await browser.storage.local.get('accentColorForDark');
-    let accentColorDarkProp = accentColorDark["accentColorForDark"];
+    let accentColorDarkProp = accentColorDark["accentColorForDark"] || "#2aa198";
 
     console.log('light accent: ' + accentColorLightProp);
     console.log('dark accent: ' + accentColorDarkProp);
@@ -174,7 +174,7 @@ async function methodHandler() {
   console.log("--->method handler called");
   const method = await browser.storage.local.get("method");
 
-  const methodProp = method["method"];
+  const methodProp = method["method"] || "manual";
   console.log('method: '+methodProp);
 
   if (methodProp == "manual") {

@@ -1,11 +1,11 @@
 function saveOptions(e) {
   e.preventDefault();
   browser.storage.local.set({
-    "method": document.querySelector("#method").value || "manual",
+    "method": document.querySelector("#method").value,
     "hourStart": document.querySelector("#hourStart").value,
     "hourEnd": document.querySelector("#hourEnd").value,
-    "accentColorForDark": document.querySelector("#accentColorForDark").value || "#2aa198",
-    "accentColorForLight": document.querySelector("#accentColorForLight").value || "#d33682",
+    "accentColorForDark": document.querySelector("#accentColorForDark").value,
+    "accentColorForLight": document.querySelector("#accentColorForLight").value,
     "apiKey": document.querySelector("#apiKey").value,
     "lat": document.querySelector("#lat").value,
     "long": document.querySelector("#long").value
