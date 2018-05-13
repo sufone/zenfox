@@ -23,7 +23,7 @@
   "options_ui": {
     "page": "settings/settings.html"
   },
-  "version": "1.8.2",
+  "version": "1.8.3",
   "applications": {
     "gecko": {
       "strict_min_version": "60.0"
