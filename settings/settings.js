@@ -24,11 +24,11 @@ function saveOptions(e) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    document.querySelector("#method").value = result["method"];
+    document.querySelector("#method").value = result["method"] || 'manual';
     document.querySelector("#hourStart").value = result["hourStart"];
     document.querySelector("#hourEnd").value = result["hourEnd"];
-    document.querySelector("#accentColorForDark").value = result["accentColorForDark"];
-    document.querySelector("#accentColorForLight").value = result["accentColorForLight"];
+    document.querySelector("#accentColorForDark").value = result["accentColorForDark"] || '#2aa198';
+    document.querySelector("#accentColorForLight").value = result["accentColorForLight"] || '#d33682';
     document.querySelector("#apiKey").value = result["apiKey"];
     document.querySelector("#lat").value = result["lat"];
     document.querySelector("#long").value = result["long"]
