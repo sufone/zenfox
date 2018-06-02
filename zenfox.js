@@ -63,12 +63,11 @@ function setTheme(theme) {
 
 ////////////////////////////////////METHODS///////////////////////////////////
 
-const date = new Date();
-const hours = date.getHours();
-
 async function timeMethod() {
-  console.log('time method started')
+  const date = new Date();
+  const hours = date.getHours();
 
+  console.log('time, now: '+hours)
   let hourStart = await browser.storage.local.get("hourStart");
   let hourStartProp = hourStart["hourStart"];
   let hourEnd = await browser.storage.local.get('hourEnd');
