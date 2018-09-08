@@ -19,22 +19,22 @@ var green =   "#859900";
 const themes = {
   'light': {
     colors: {
-      "accentcolor": base3,
+      "accentcolor": base2,
       "textcolor": base01,
-      "toolbar": base2,
+      "toolbar": base3,
       "toolbar_text": base00,
-      "toolbar_field": base3,
+      "toolbar_field": base2,
       "toolbar_field_text": base01,
       "tab_line": magenta,
-      "popup": base3,
+      "popup": base2,
       "popup_text": base01,
       "tab_loading": magenta,
       "icons": base00,
       "icons_attention": magenta,
-      "toolbar_vertical_separator": base3,
-      "toolbar_field_separator": base2,
-      "button_background_active": base3,
-      "button_background_hover": base3
+      "toolbar_vertical_separator": base2,
+      "toolbar_field_separator": base3,
+      "button_background_active": base2,
+      "button_background_hover": base2
     },
   },
   'dark': {
