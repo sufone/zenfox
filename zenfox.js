@@ -31,8 +31,8 @@ const themes = {
       "tab_loading": magenta,
       "icons": base00,
       "icons_attention": magenta,
-      "toolbar_vertical_separator": base2,
-      "toolbar_field_separator": base3,
+      "toolbar_field_separator": base00,
+      "toolbar_vertical_separator": base00,
       "button_background_active": base2,
       "button_background_hover": base2,
       "ntp_background": base2,
@@ -42,7 +42,12 @@ const themes = {
       "sidebar": base3,
       "sidebar_highlight": base2, 
       "sidebar_highlight_text": magenta, 
-      "sidebar_text": base00
+      "sidebar_text": base00,
+      "toolbar_field_border_focus": magenta,
+      "toolbar_top_separator": base00,
+      "toolbar_bottom_separator": base00,
+      "toolbar_field_border": base00,
+      "tab_text": magenta
     },
   },
   'dark': {
