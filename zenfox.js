@@ -65,7 +65,22 @@ const themes = {
       "icons": base0,
       "icons_attention": cyan,
       "toolbar_vertical_separator": base02,
-      "toolbar_field_separator": base03
+      "toolbar_field_separator": base03,
+      "button_background_active": base02,
+      "button_background_hover": base02,
+      "ntp_background": base02,
+      "ntp_text": base1,
+      "popup_border": cyan,
+      "popup_highlight": cyan,
+      "sidebar": base03,
+      "sidebar_highlight": base02, 
+      "sidebar_highlight_text": cyan, 
+      "sidebar_text": base0,
+      "toolbar_field_border_focus": cyan,
+      "toolbar_top_separator": base01,
+      "toolbar_bottom_separator": base01,
+      "toolbar_field_border": base01,
+      "tab_text": cyan
     },
   }
 };
