@@ -32,7 +32,9 @@ const themes = {
       "icons": base00,
       "icons_attention": magenta,
       "toolbar_vertical_separator": base3,
-      "toolbar_field_separator": base2
+      "toolbar_field_separator": base2,
+      "button_background_active": base3,
+      "button_background_hover": base3
     },
   },
   'dark': {
