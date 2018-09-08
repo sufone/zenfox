@@ -167,7 +167,7 @@ async function weatherMethod() {
 
 async function accentHandler() {
     console.log('--->accent handler called');
-
+    //looking back this function is trash; but it works and I don't want to fix it >.<
     let accentColorLight = await browser.storage.local.get('accentColorForLight');
     let accentColorLightProp = accentColorLight["accentColorForLight"] || "#d33682";
 
@@ -180,10 +180,20 @@ async function accentHandler() {
     themes['light'].colors["tab_line"] = accentColorLightProp;
     themes['light'].colors["tab_loading"] = accentColorLightProp;
     themes['light'].colors["icons_attention"] = accentColorLightProp;
+    themes['light'].colors["popup_border"] = accentColorLightProp;
+    themes['light'].colors["popup_highlight"] = accentColorLightProp;
+    themes['light'].colors["sidebar_highlight_text"] = accentColorLightProp;
+    themes['light'].colors["toolbar_field_border_focus"] = accentColorLightProp;
+    themes['light'].colors["tab_text"] = accentColorLightProp;
 
     themes['dark'].colors["tab_line"] = accentColorDarkProp;
     themes['dark'].colors["tab_loading"] = accentColorDarkProp;
     themes['dark'].colors["icons_attention"] = accentColorDarkProp;
+    themes['dark'].colors["popup_border"] = accentColorDarkProp;
+    themes['dark'].colors["popup_highlight"] = accentColorDarkProp;
+    themes['dark'].colors["sidebar_highlight_text"] = accentColorDarkProp;
+    themes['dark'].colors["toolbar_field_border_focus"] = accentColorDarkProp;
+    themes['dark'].colors["tab_text"] = accentColorDarkProp;
 
     console.log('<---accents set');
 }
