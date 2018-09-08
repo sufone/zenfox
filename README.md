@@ -46,3 +46,5 @@ Recommended add-ons to go with it (but require some configuration from you):
 *This extension can basically be forked and have the theme definitons replaced
 and serve as kind of the template for dynamic Firefox themes of any color
 scheme.*
+
+Check out this [awesome fork](https://github.com/jonascj/zen-fox) which uses the `Messaging API` to change the Zenfox theme along with other system apps!
