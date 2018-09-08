@@ -37,8 +37,12 @@ const themes = {
       "button_background_hover": base2,
       "ntp_background": base2,
       "ntp_text": base01,
-      "popup_border": base3,
-      "popup_highlight": magenta
+      "popup_border": magenta,
+      "popup_highlight": magenta,
+      "sidebar": base3,
+      "sidebar_highlight": base2, 
+      "sidebar_highlight_text": magenta, 
+      "sidebar_text": base00
     },
   },
   'dark': {
