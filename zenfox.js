@@ -34,7 +34,9 @@ const themes = {
       "toolbar_vertical_separator": base2,
       "toolbar_field_separator": base3,
       "button_background_active": base2,
-      "button_background_hover": base2
+      "button_background_hover": base2,
+      "ntp_background": base2,
+      "ntp_text": base01
     },
   },
   'dark': {
