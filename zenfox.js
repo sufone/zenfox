@@ -19,8 +19,8 @@ var green =   "#859900";
 const themes = {
   'light': {
     colors: {
-      "accentcolor": base2,
-      "textcolor": base01,
+      "frame": base2,
+      "tab_background_text": base01,
       "toolbar": base3,
       "toolbar_text": base00,
       "toolbar_field": base2,
@@ -52,8 +52,8 @@ const themes = {
   },
   'dark': {
     colors: {
-      "accentcolor": base03,
-      "textcolor": base1,
+      "frame": base03,
+      "tab_background_text": base1,
       "toolbar": base02,
       "toolbar_text": base0,
       "toolbar_field": base03,
