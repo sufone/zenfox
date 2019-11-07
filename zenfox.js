@@ -28,6 +28,8 @@ const themes = {
       "tab_line": magenta,
       "popup": base2,
       "popup_text": base01,
+      "popup_border": magenta,
+      "popup_highlight": base3,
       "tab_loading": magenta,
       "icons": base00,
       "icons_attention": magenta,
@@ -187,6 +189,7 @@ async function accentHandler() {
     themes['light'].colors["sidebar_highlight_text"] = accentColorLightProp;
     themes['light'].colors["toolbar_field_border_focus"] = accentColorLightProp;
     themes['light'].colors["tab_text"] = accentColorLightProp;
+    themes['light'].colors["toolbar_field_highlight"] = accentColorLightProp;
 
     themes['dark'].colors["tab_line"] = accentColorDarkProp;
     themes['dark'].colors["tab_loading"] = accentColorDarkProp;
@@ -196,6 +199,7 @@ async function accentHandler() {
     themes['dark'].colors["sidebar_highlight_text"] = accentColorDarkProp;
     themes['dark'].colors["toolbar_field_border_focus"] = accentColorDarkProp;
     themes['dark'].colors["tab_text"] = accentColorDarkProp;
+    themes['dark'].colors["toolbar_field_highlight"] = accentColorDarkProp;
 
     console.log('<---accents set');
 }
