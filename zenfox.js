@@ -132,6 +132,15 @@ async function manualMethod() {
   }
 }
 
+async function systemThemeMethod() {
+  console.log('system theme method started')
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    const newColorScheme = e.matches ? "dark" : "light";
+    setTheme(newColorScheme)
+  });
+}
+
 async function weatherMethod() {
   console.log('weather method started')
 
@@ -256,6 +265,14 @@ async function methodHandler() {
 
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
+  }
+  else if (methodProp == "systemTheme") {
+    console.log("system theme method selected")
+    browser.browserAction.setTitle({title: "Zen Fox: System Theme"})
+    systemThemeMethod()
+
+    browser.browserAction.onClicked.removeListener(manualMethod)
+    browser.browserAction.onClicked.addListener(openSettings)
   }
 }
 
