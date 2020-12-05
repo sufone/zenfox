@@ -132,13 +132,22 @@ async function manualMethod() {
   }
 }
 
+function setSystemTheme() {
+  let currentSystemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"
+  console.log(currentSystemTheme)
+  setTheme(currentSystemTheme)
+}
+
 async function systemThemeMethod() {
   console.log('system theme method started')
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    const newColorScheme = e.matches ? "dark" : "light";
-    setTheme(newColorScheme)
-  });
+  //set whenever method is called
+  setSystemTheme()
+
+  //set listener for future changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setSystemTheme);
+
+
 }
 
 async function weatherMethod() {
@@ -232,13 +241,15 @@ async function methodHandler() {
   console.log('method: '+methodProp);
 
   if (methodProp == "manual") {
-    const currentTheme = await browser.storage.local.get("currentTheme"); 
+    const currentTheme = await browser.storage.local.get("currentTheme");
     const currentThemeProp = currentTheme["currentTheme"]; //repeated from above… but too annoying
 
     console.log("manual method selected");
     browser.browserAction.setTitle({title: "Zen Fox: Manual"});
     browser.browserAction.onClicked.removeListener(openSettings); //otherwise, it would do both
     browser.browserAction.onClicked.addListener(manualMethod);
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', setSystemTheme);
+
     //meant for browser startup, sets last used theme:
     switch (currentThemeProp) {
       case 'light':
@@ -257,6 +268,7 @@ async function methodHandler() {
 
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', setSystemTheme)
   }
   else if (methodProp == "weather") {
     console.log("weather method selected");
@@ -265,6 +277,7 @@ async function methodHandler() {
 
     browser.browserAction.onClicked.removeListener(manualMethod);
     browser.browserAction.onClicked.addListener(openSettings);
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', setSystemTheme)
   }
   else if (methodProp == "systemTheme") {
     console.log("system theme method selected")
@@ -273,6 +286,7 @@ async function methodHandler() {
 
     browser.browserAction.onClicked.removeListener(manualMethod)
     browser.browserAction.onClicked.addListener(openSettings)
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', setSystemTheme)
   }
 }
 
