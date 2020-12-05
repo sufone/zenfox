@@ -6,9 +6,10 @@ Zen Fox uses the stunning Solarized Theme, ported to Firefox using it's latest A
 
 **Methods**:
 
-Choose from 3 different methods to switch between Dark & Light Themes:
+Choose from 4 different methods to switch between Dark & Light Themes:
 
 * Manual — toolbar button to switch themes upon press
+* System — automatically changes theme based on OS dark/light theme
 * Time — change themes automatically at times of your choice
 * Weather — update theme based on current cloudiness at your locale
 
