@@ -30,6 +30,7 @@ const themes = {
       "popup_text": base01,
       "popup_border": magenta,
       "popup_highlight": base3,
+      "popup_highlight_text": magenta,
       "tab_loading": magenta,
       "icons": base00,
       "icons_attention": magenta,
@@ -65,6 +66,7 @@ const themes = {
       "popup_text": base1,
       "popup_border": cyan,
       "popup_highlight": base02,
+      "popup_highlight_text": cyan,
       "tab_loading": cyan,
       "icons": base0,
       "icons_attention": cyan,
@@ -203,7 +205,7 @@ async function accentHandler() {
     themes['light'].colors["tab_loading"] = accentColorLightProp;
     themes['light'].colors["icons_attention"] = accentColorLightProp;
     themes['light'].colors["popup_border"] = accentColorLightProp;
-    themes['light'].colors["popup_highlight"] = accentColorLightProp;
+    themes['light'].colors["popup_highlight_text"] = accentColorLightProp;
     themes['light'].colors["sidebar_highlight_text"] = accentColorLightProp;
     themes['light'].colors["toolbar_field_border_focus"] = accentColorLightProp;
     themes['light'].colors["tab_text"] = accentColorLightProp;
@@ -213,7 +215,7 @@ async function accentHandler() {
     themes['dark'].colors["tab_loading"] = accentColorDarkProp;
     themes['dark'].colors["icons_attention"] = accentColorDarkProp;
     themes['dark'].colors["popup_border"] = accentColorDarkProp;
-    themes['dark'].colors["popup_highlight"] = accentColorDarkProp;
+    themes['dark'].colors["popup_highlight_text"] = accentColorDarkProp;
     themes['dark'].colors["sidebar_highlight_text"] = accentColorDarkProp;
     themes['dark'].colors["toolbar_field_border_focus"] = accentColorDarkProp;
     themes['dark'].colors["tab_text"] = accentColorDarkProp;
@@ -228,7 +230,7 @@ async function openSettings() {
 
   if (initializedCheckProp != "yes") {
     browser.runtime.openOptionsPage();
-  } 
+  }
   browser.storage.local.set({"initialized": "yes"});
   console.log('---openSettingsRun');
 }

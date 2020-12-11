@@ -1,6 +1,6 @@
 {
   "description": "Theme Firefox to suit you, day or night. Solarized.",
-  "homepage_url": "https://addons.mozilla.org/en-US/firefox/addon/zen-fox/",
+  "homepage_url": "https://github.com/mr-islam/zen-fox/",
   "manifest_version": 2,
   "name": "Zen Fox",
   "permissions": [
