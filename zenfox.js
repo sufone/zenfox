@@ -94,11 +94,11 @@ const themes = {
 async function setTheme(theme) {
   try {
     browser.storage.local.set({'currentTheme': theme});
-    var targetTheme = theme === "light" ? "lightTheme" : "darkTheme"
+    var targetTheme = theme === "light" ? "lightTheme" : "darkTheme";
     var themeId = await browser.storage.local.get().then(res => res[targetTheme])
-    // browser.theme.update(themes[theme]);
+
     console.log(`theme: ${theme} (${themeId}) applied`, theme);
-    if (themeId === "Sunflower") {
+    if (themeId === "Solarized") {
       browser.theme.update(themes[theme]);
     } else {
       await browser.management.setEnabled(themeId, true)

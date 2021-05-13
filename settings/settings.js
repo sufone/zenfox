@@ -1,11 +1,19 @@
 function saveOptions(e) {
   e.preventDefault();
+  var lightTheme = document.querySelector("#lightTheme").value;
+  var darkTheme = document.querySelector("#darkTheme").value;
+  if ((lightTheme === "Solarized" || darkTheme === "Solarized") && lightTheme !== darkTheme) {
+    document.querySelector("#solarizedWarning").style.color = "red"
+  } else {
+    document.querySelector("#solarizedWarning").style.color = "inherit"
+  }
+
   browser.storage.local.set({
     "method": document.querySelector("#method").value,
     "hourStart": document.querySelector("#hourStart").value,
     "hourEnd": document.querySelector("#hourEnd").value,
-    "lightTheme": document.querySelector("#lightTheme").value,
-    "darkTheme": document.querySelector("#darkTheme").value,
+    "lightTheme": lightTheme,
+    "darkTheme": darkTheme,
     "apiKey": document.querySelector("#apiKey").value,
     "lat": document.querySelector("#lat").value,
     "long": document.querySelector("#long").value
