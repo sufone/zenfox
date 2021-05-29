@@ -6,7 +6,8 @@
   "permissions": [
     "storage",
     "theme",
-    "alarms"
+    "alarms",
+    "management"
   ],
   "background": {
     "scripts": ["zenfox.js"]

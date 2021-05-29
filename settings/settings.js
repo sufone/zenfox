@@ -1,11 +1,19 @@
 function saveOptions(e) {
   e.preventDefault();
+  var lightTheme = document.querySelector("#lightTheme").value;
+  var darkTheme = document.querySelector("#darkTheme").value;
+  if ((lightTheme === "Solarized" || darkTheme === "Solarized") && lightTheme !== darkTheme) {
+    document.querySelector("#solarizedWarning").style.color = "red"
+  } else {
+    document.querySelector("#solarizedWarning").style.color = "inherit"
+  }
+
   browser.storage.local.set({
     "method": document.querySelector("#method").value,
     "hourStart": document.querySelector("#hourStart").value,
     "hourEnd": document.querySelector("#hourEnd").value,
-    "accentColorForDark": document.querySelector("#accentColorForDark").value,
-    "accentColorForLight": document.querySelector("#accentColorForLight").value,
+    "lightTheme": lightTheme,
+    "darkTheme": darkTheme,
     "apiKey": document.querySelector("#apiKey").value,
     "lat": document.querySelector("#lat").value,
     "long": document.querySelector("#long").value
@@ -21,25 +29,32 @@ function saveOptions(e) {
   });
 }
 
-function restoreOptions() {
+async function restoreOptions() {
+  var lightThemeSelector = document.querySelector("#lightTheme")
+  var darkThemeSelector = document.querySelector("#darkTheme")
+  var extensions = await browser.management.getAll();
+  var themes = extensions.filter(ext => ext.type === "theme");
 
-  function setCurrentChoice(result) {
-    document.querySelector("#method").value = result["method"] || 'manual';
-    document.querySelector("#hourStart").value = result["hourStart"];
-    document.querySelector("#hourEnd").value = result["hourEnd"];
-    document.querySelector("#accentColorForDark").value = result["accentColorForDark"] || '#2aa198';
-    document.querySelector("#accentColorForLight").value = result["accentColorForLight"] || '#d33682';
-    document.querySelector("#apiKey").value = result["apiKey"];
-    document.querySelector("#lat").value = result["lat"];
-    document.querySelector("#long").value = result["long"]
-  }
+  console.info("Themes", themes)
 
-  function onError(error) {
-    console.log(`Error: ${error}`);
-  }
+  themes.forEach(t => {
+    var opt = document.createElement("option");
+    opt.value = t.id
+    opt.textContent = t.name
+    darkThemeSelector.appendChild(opt)
+    lightThemeSelector.appendChild(opt.cloneNode(true))
+  })
 
-  var getting = browser.storage.local.get();
-  getting.then(setCurrentChoice, onError);
+  var config = await browser.storage.local.get()
+  document.querySelector("#method").value = config["method"] || 'manual';
+  document.querySelector("#hourStart").value = config["hourStart"];
+  document.querySelector("#hourEnd").value = config["hourEnd"];
+  document.querySelector("#apiKey").value = config["apiKey"];
+  document.querySelector("#lat").value = config["lat"];
+  document.querySelector("#long").value = config["long"]
+
+  lightThemeSelector.value = config["lightTheme"] || 'firefox-compact-light@mozilla.org';
+  darkThemeSelector.value = config["darkTheme"] || 'firefox-compact-dark@mozilla.org';
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

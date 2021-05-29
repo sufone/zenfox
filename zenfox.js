@@ -91,10 +91,21 @@ const themes = {
   }
 };
 
-function setTheme(theme) {
-  browser.storage.local.set({'currentTheme': theme});
-  browser.theme.update(themes[theme]);
-  console.log('theme:' + theme + 'applied');
+async function setTheme(theme) {
+  try {
+    browser.storage.local.set({'currentTheme': theme});
+    var targetTheme = theme === "light" ? "lightTheme" : "darkTheme";
+    var themeId = await browser.storage.local.get().then(res => res[targetTheme])
+
+    console.log(`theme: ${theme} (${themeId}) applied`, theme);
+    if (themeId === "Solarized") {
+      browser.theme.update(themes[theme]);
+    } else {
+      await browser.management.setEnabled(themeId, true)
+    }
+  } catch (e) {
+    console.warn("Could not set them!", e, theme, themeId)
+  }
 }
 
 ////////////////////////////////////METHODS///////////////////////////////////
