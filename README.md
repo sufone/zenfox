@@ -1,5 +1,7 @@
 # Zen Fox
 
+**Maintainers Wanted** - Sadly I can't keep up maintenance, even though it's light. Let me know if you're interested and we can work out transferring ownership here and the Firefox add-ons store, or just fork and go your own way. 
+
 As we spend more and more of our lives computing, and more and more of our computing is done on the browser, our browser being the awesome Firefox — it must be themed appropriately for its heavy duty.
 
 Zen Fox uses the stunning Solarized Theme, ported to Firefox using it's latest APIs. That means browser menus like the hamburger and overflow are themed to suit the rest of your browser.
